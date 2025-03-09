@@ -1,1 +1,1 @@
-Deno Update: 最近のフロントエンド向け機能
+Deno で VSCode Extension を作ってみた
