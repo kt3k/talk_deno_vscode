@@ -81,8 +81,8 @@ const result = await esbuild.build({
   plugins: [...denoPlugins({
     configPath: resolve("path/to/deno.json")
   })],
-  entryPoints: ["src/extension.ts"],
-  outfile: "out/extension.js",
+  entryPoints: ["extension.ts"],
+  outfile: "extension.js",
   bundle: true,
   external: ["vscode"],
   format: "cjs",
@@ -137,8 +137,8 @@ const result = await esbuild.build({
   plugins: [...denoPlugins({
     configPath: resolve("path/to/deno.json")
   })],
-  entryPoints: ["src/extension.ts"],
-  outfile: "out/extension.js",
+  entryPoints: ["extension.ts"],
+  outfile: "extension.js",
   bundle: true,
   external: ["vscode"],
   format: "cjs",
@@ -154,15 +154,27 @@ class: middle center inverse
 ---
 ## @kt3k/pack
 
-という esbuild と esbuild-deno-loader のラッパー CLI を使うと
+esbuild と esbuild-deno-loader のラッパー CLI
 
 --
 ```sh
-deno -A jsr:@kt3k/pack src/extension.ts \
-  -o out/extension.js --external vscode --format cjs
+deno -A jsr:@kt3k/pack input.ts
 ```
 
-と、少し簡潔に書けます
+で、Deno 向けのソースコードをバンドルできる。
+
+---
+## @kt3k/pack
+
+VSCode Extension のビルドは
+
+--
+```sh
+deno -A jsr:@kt3k/pack extension.ts \
+  -o extension.js --external vscode --format cjs
+```
+
+と、簡潔に書けます
 
 ---
 class: middle center inverse
@@ -202,12 +214,12 @@ import * as vscode from "vscode";
 ```
 
 --
-@ts-types を指定すると、本来の解決ルールと関係なく、指定された型定義モジュールで型を解決するようになる
+@ts-types を指定すると、本来の解決ルールと関係なく、指定された型定義ファイルで型が上書きされる
 
 ---
 class: middle center inverse
 
-Extension のメインスレッドの型はそれで良いとして<br/>
+Extension のメインの型はそれで良いとして<br/>
 Webview側は?
 
 ---
