@@ -317,14 +317,22 @@ import * as vscode from "vscode";
 ---
 class: middle center inverse
 
-Extension のメインの型はそれで良いとして<br/>
-Webview側は?
+Extension の Webview側の型
+
+---
+
+## 型チェックのポイント (Webview)
+
+Webviewの型付け
+
+- Webview (UI) 側はメイン側とは型が違う
+- Webview 側は基本的には Web の型
+- それプラス `aquireVsCodeApi` というグローバル関数が生えている
 
 ---
 
 ## 型チェックのポイント
 
-Webviewの型付け
 
 ファイルの先頭にこれを書けば OK
 
@@ -334,6 +342,8 @@ Webviewの型付け
 /// <reference lib="dom" />
 /// <reference types="@types/vscode-webview" />
 ```
+
+<small>(参考: [Triple-Slash Directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html))</small>
 
 ---
 
@@ -376,8 +386,13 @@ Webviewの型付け
 
 
 ---
+class: middle center inverse
 
-## その他
+リント・フォーマット
+
+---
+
+## リント・フォーマット
 
 - リント - deno lint で OK
 - フォーマット - deno fmt で OK
